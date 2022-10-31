@@ -48,6 +48,7 @@ public class Deck {
     } 
 
     public static Card[] newHand(){
+        //use a constant here
         Card[] hand = new Card[7];
         hand = getCards(7);
         return hand;

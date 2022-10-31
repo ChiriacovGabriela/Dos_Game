@@ -8,10 +8,13 @@ import java.util.Map;
 public class Player{
     private static final int VALUE_OF_JOCKER = 0;
     private static final int VALUE_OF_JOCKER_DOS = 2;
+    //why is it public?
     public static int valueSameCard;
     protected final Card[] hand;
-    protected  static Card[] centerRow;
+    protected static Card[] centerRow;
 
+    //issue seggregation interface
+    //this field should not be static as it refers to one player not all the players
     public static Map <String, ArrayList<Integer>> handPlayer = new HashMap<>();
 
     public Player(Card[] hand) {
@@ -31,6 +34,7 @@ public class Player{
         }
     }
 
+    //get method should return something
     public static void getOneCard() {
 
         Card[] one = Deck.getCards(1);
@@ -38,6 +42,7 @@ public class Player{
 
     }
 
+    //is* method should return boolean
     public static Card isMatch (){
         String color = "";
         int value = 0;
@@ -66,6 +71,7 @@ public class Player{
         return card;
     }
 
+    //is* method should return bookean
     public static Card isDoubleMatch(){
         String color = "";
         int value = 0;
@@ -110,6 +116,7 @@ public class Player{
         return false;
     }
 
+    //is* method should return boolean
     public static String isJocker(){
         for(Card c : centerRow) {
             String color = c.getCouleur();
@@ -138,16 +145,18 @@ public class Player{
                 value = handPlayer.get(c).get(0);
             }    
         }
-        Card card = new Card(color, value);
-        return card;
+        return new Card(color, value);
     }
 
+    //issue interface seggregation, use List<>
+    //method name should contain a verb
     public static int sameCards(ArrayList <Integer> cards) {
         int max = 0;
         
         for(int i = 0; i < cards.size(); i++) {
             int nbOfSameCards = 1; 
             for (int j = i+1; j < cards.size(); j++) {
+                //are you sure you want a == here and not .equals?
                 if(cards.get(i) == cards.get(j)) {
                     nbOfSameCards++;
                 } 
@@ -171,6 +180,7 @@ public class Player{
         int value = 0;
         String color="";
         for(String currentColor : handPlayer.keySet()) {
+            //use constant here instead of 2
             if(handPlayer.get(currentColor).size() >= 2) {
                 int sameCards = sameCards(handPlayer.get(currentColor));
                 for(Card cardCenterRow : centerRow) {
@@ -184,17 +194,18 @@ public class Player{
         }
         if(maxCombination != 0)
         {
-            Card card = new Card(color, value);
-            return card;
+            return new Card(color, value);
         }
       return null;
     }
     public static void removeCard(Card card){
-        ArrayList<Integer> tab = handPlayer.get(card.getCouleur());
+
+        List<Integer> tab = handPlayer.get(card.getCouleur());
         for (int i =0; i<tab.size(); i++){
             if (tab.get(i) == card.getValeur()){
                 tab.remove(i);
             }
+            //use is empty
             if(tab.size() == 0){
                 handPlayer.remove(card.getCouleur());
 
@@ -213,7 +224,7 @@ public class Player{
         return ;
         
     }
-
+    //tests should be written as a unit test
     public static void test() {
         Card card = null;
         String color = "";
@@ -248,13 +259,13 @@ public class Player{
 
     public static void main(String[] args){
         Deck deck = new Deck();
-        
-        Card[] hand = new Card[7];
-        hand = Deck.newHand();
+        //use constant here
+        Card[] hand =  Deck.newHand();
         System.out.println("Tes Cartes :");
-            for(int i=0; i<hand.length; i++){
+        //use for each here
+            for(Card card : hand){
                 
-                System.out.println(hand[i].getCouleur()+" "+ hand[i].getValeur());
+                System.out.println(card.getCouleur()+" "+ card.getValeur());
             }
             arrange(hand);
 
@@ -263,9 +274,9 @@ public class Player{
             System.out.println("Clés: " + handPlayer.keySet());
             System.out.println("Values: " + handPlayer.values());
             System.out.println("Cartes sur la table :");
-            for(int i=0; i<centerRow .length; i++){
+            for(Card card : centerRow){
                 
-                System.out.println(centerRow[i].getCouleur()+" "+ centerRow[i].getValeur());
+                System.out.println(card.getCouleur()+" "+ card.getValeur());
             } 
 
             test();
