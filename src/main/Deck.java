@@ -1,10 +1,8 @@
 package main;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class Deck {
-
     public static ArrayList <Card> cards = new ArrayList <Card>() ;
 
     public Deck(){
@@ -49,18 +47,19 @@ public class Deck {
         return offertsCards;
     } 
 
-    public static  Card[] newHand(){
+    public static Card[] newHand(){
         Card[] hand = new Card[7];
         hand = getCards(7);
         return hand;
     }
 
 
-    public static Card [] centerRow(){
+    public  static Card [] centerRow(){
         Card [] centerRow = new Card[2];
         centerRow = getCards(2);
         return centerRow;
 
     }
 }
+    
 
