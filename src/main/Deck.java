@@ -2,20 +2,22 @@ package main;
 import java.util.ArrayList;
 import java.util.Collections;
 
-
+/** */    
 public class Deck {
+
     private static ArrayList <Card> cards = new ArrayList <Card>() ;
     private static Card [] centerRow ;
     private static final int NB_OF_CARDS_INITIAL_HAND = 7;
     private static final int NB_OF_CARDS_CENTER_ROW = 2;
     private static final int VALUE_OF_JOCKER_DOS = 2;
 
-
+    
     public Deck(){
-        generateDeck(); // initialisation du tous les combinaisons possibles des cartes
-        
+        generateDeck(); // initialisation du tous les combinaisons possibles des cartes 
     }
-
+    /**
+     * 
+     */
     public static void generateDeck(){
         
         String [] couleurs = {"V", "R", "G","A"};
@@ -41,6 +43,12 @@ public class Deck {
        Collections.shuffle(cards);
        
     }
+    
+    /**
+     * 
+     * @param n
+     * @return
+     */
 
     public static Card[] getCards(int n){
         Card[] offertsCards = new Card[n];
@@ -54,13 +62,20 @@ public class Deck {
         }
         return offertsCards;
     } 
+    /**
+     * 
+     * @return
+     */
 
     public Card[] newHand(){
         Card[] hand = new Card[NB_OF_CARDS_INITIAL_HAND];
         hand = getCards(NB_OF_CARDS_INITIAL_HAND);
         return hand;
     }
-
+    /**
+     * 
+     * @return
+     */
 
     public  static Card [] centerRow(){
         centerRow = getCards(NB_OF_CARDS_CENTER_ROW );
@@ -80,6 +95,10 @@ public class Deck {
         return centerRow;
 
     }
+    /**
+     * 
+     * @return
+     */
     public static boolean isCardsEmpty(){
         if(cards.isEmpty()){
 

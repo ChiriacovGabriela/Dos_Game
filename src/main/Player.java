@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class Player{
     private static final int VALUE_OF_JOCKER = 0;
@@ -45,27 +46,22 @@ public class Player{
 
     public Card match (Card [] centerRow){
         String color = "";
-        int value = 0;
         Card card = null;
-
         
         for (Card carteRangeCentral : centerRow ){  
-
             color = carteRangeCentral.getCouleur();      
             if (handPlayer.containsKey(color)){
                 List<Integer> values = handPlayer.get(color);
-                for(int i = 0; i<values.size(); i++) {
-                card = new Card(color, values.get(i));
+                card = new Card(color, values.get(0));
                 return card;
-                }
+                
             }else{
-                for(String key : handPlayer.keySet()){
+                Set<String> entrySet = handPlayer.keySet();
+                for(String key : entrySet){
                     List <Integer> valuesTab = handPlayer.get(key);
-                    for (int currentValue : valuesTab ){
+                    for ( int currentValue : valuesTab ){
                         if (currentValue == carteRangeCentral.getValeur()){
-                            value = currentValue;
-                            color=key;
-                            card = new Card(color, value);
+                            card = new Card(key, currentValue);
                             return card;
                     }
                 }
@@ -104,12 +100,12 @@ public class Player{
         for (int i=0; i < valuesCards.size(); i++){
             if (valuesCards.get(i) != VALUE_OF_JOCKER && valuesCards.get(i)!= VALUE_OF_JOCKER_DOS) {
                 for(int j = i+1; j < valuesCards.size(); j++) {
-                    if (valuesCards.get(j) != VALUE_OF_JOCKER && valuesCards.get(j) != VALUE_OF_JOCKER_DOS){
-                        if (valuesCards.get(i) + valuesCards.get(j) == x){
+                    if (valuesCards.get(j) != VALUE_OF_JOCKER && 
+                            valuesCards.get(j) != VALUE_OF_JOCKER_DOS && 
+                                valuesCards.get(i) + valuesCards.get(j) == x){
                             valuesCardsForSum.add(valuesCards.get(i));
                             valuesCardsForSum.add(valuesCards.get(j));
                             return valuesCardsForSum;
-                    }
                 }
             }
         }
@@ -158,14 +154,13 @@ public class Player{
     }
 
     
-    //method name should contain a verb
-    public int sameCards(List <Integer> cards) {
+
+    public int getNbOfSameCards(List <Integer> cards) {
         int max = 0;
         for(int i = 0; i < cards.size(); i++) {
             if(cards.get(i)!= VALUE_OF_JOCKER && cards.get(i)!= VALUE_OF_JOCKER_DOS){
                 int nbOfSameCards = 1; 
                 for (int j = i+1; j < cards.size(); j++) {
-                    //are you sure you want a == here and not .equals?
                     if(Objects.equals(cards.get(i), cards.get(j))) {
                         nbOfSameCards++;
                 } 
@@ -193,7 +188,7 @@ public class Player{
             if(handPlayer.get(currentColor).size() >= 2 && currentColor != null) {
                 System.out.println("culoarea curenta: " + currentColor);
                 
-                int sameCards = sameCards(handPlayer.get(currentColor));
+                int sameCards = getNbOfSameCards(handPlayer.get(currentColor));
                 for(Card cardCenterRow : centerRow) {
                     if(cardCenterRow .getValeur() == valueSameCard || currentColor.equals(cardCenterRow.getCouleur())){
                         if(maxCombination < sameCards) {
@@ -209,6 +204,7 @@ public class Player{
         }
       return listeCardsLargestCombination;
     }
+
     public void removeCards(List <Card> cardsToRemove){
         for(int i = 0; i < cardsToRemove.size(); i++ ){
             Card card = cardsToRemove.get(i);
@@ -236,8 +232,8 @@ public class Player{
         return ;
         
     }
-    //tests should be written as a unit test
-    public void test(Card [] centerRow) {
+    
+    public void gameOfPlayer(Card [] centerRow) {
         System.out.println("Clés: " + handPlayer.keySet());
         System.out.println("Values: " + handPlayer.values());  
         List <Card> cardsToRemove = new ArrayList<>();

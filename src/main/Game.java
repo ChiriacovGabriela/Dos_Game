@@ -3,7 +3,7 @@ package main;
 public class Game {
 
     public static void main(String[] args) {
-        Player p1 = new Player("Nicolas");
+        Player p1 = new Player("Paul");
         Player p2 = new Player("Elio");
 
         Deck deck = new Deck(); 
@@ -13,14 +13,14 @@ public class Game {
         Card[] hand= deck.newHand();
       
         p1.arrange(hand);
-        System.out.println("Jucatorul 1");
+        System.out.println("Player 1");
         for(Card card : hand){
             System.out.println(card.getCouleur()+" "+ card.getValeur());
         }
         Card[] hand2 = deck.newHand();
       
         p2.arrange(hand2);
-        System.out.println("Jucatorul 2");
+        System.out.println("Player 2");
         for(Card card : hand2){
             System.out.println(card.getCouleur()+" "+ card.getValeur());
         }
@@ -39,13 +39,13 @@ public class Game {
 
         boolean win = false;
         
-        while(!win && !deck.isCardsEmpty()){
+        while(!win && !Deck.isCardsEmpty()){
 
             
 
-            System.out.println("Joaca jucatorul 1 ");
+            System.out.println("Player 1 ");
 
-            p1.test(centerRow );
+            p1.gameOfPlayer(centerRow );
 
             System.out.println("RC: ");
 
@@ -54,9 +54,9 @@ public class Game {
                 System.out.println(card.getCouleur()+" "+ card.getValeur());
             } 
 
-            System.out.println("Joaca jucatorul 2 ");
+            System.out.println("Player 2 ");
 
-            p2.test(centerRow );
+            p2.gameOfPlayer(centerRow );
 
             System.out.println("RC: ");
 
