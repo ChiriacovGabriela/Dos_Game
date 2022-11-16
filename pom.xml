@@ -144,14 +144,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-scm-publish-plugin</artifactId>
-				<version>3.0.0</version>
-				<configuration>
-					<scmBranch>gh-pages</scmBranch>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 
@@ -163,22 +155,6 @@
 
 			</plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-changelog-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<type>range</type>
-					<range>1</range>
-
-					<headingDateFormat>MM-dd-yyyy</headingDateFormat>
-					<outputEncoding>${project.reporting.outputEncoding}</outputEncoding>
-
-				</configuration>
-		<!--		<reports>
-					<report>changelog</report>
-				</reports>-->
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-project-info-reports-plugin</artifactId>
@@ -232,10 +208,4 @@
 
 		</plugins>
 	</reporting>
-	<distributionManagement>
-		<site>
-			<id>github</id>
-			<url>scm:git:git@github.com:nherbaut/java-maven-quickstart-latest.git</url>
-		</site>
-	</distributionManagement>
 </project>
