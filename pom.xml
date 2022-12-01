@@ -3,9 +3,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>groupId</groupId>
-	<artifactId>artifactId</artifactId>
+	<groupId>fr.pantheonsorbonne.miage</groupId>
+	<artifactId>dos</artifactId>
 	<version>1.0-SNAPSHOT</version>
+
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,6 +31,12 @@
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>fr.pantheonsorbonne.miage</groupId>
+			<artifactId>poo-player</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -131,9 +139,6 @@
 				<version>3.12.1</version>
 				<configuration>
 					<attach>true</attach>
-					<reportPlugins>
-						
-					</reportPlugins>
 				</configuration>
 				<executions>
 					<execution>
@@ -144,6 +149,7 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
 	</build>
 
@@ -154,6 +160,7 @@
 				<artifactId>maven-project-info-reports-plugin</artifactId>
 
 			</plugin>
+
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -191,13 +198,13 @@
 					<sourceFileIncludes>
 						src/main/java/**/*.java
 					</sourceFileIncludes>
-				<reports>
-					<report>javadoc</report>
-					<report>aggregate</report>
-					<failOnError>false</failOnError>
-				</reports>
-			</configuration>
-				
+					<reports>
+						<report>javadoc</report>
+						<report>aggregate</report>
+						<failOnError>false</failOnError>
+					</reports>
+				</configuration>
+
 			</plugin>
 
 			<plugin>
@@ -208,4 +215,24 @@
 
 		</plugins>
 	</reporting>
+	<distributionManagement>
+		<site>
+			<id>github</id>
+			<url>scm:git:git@github.com:nherbaut/java-maven-quickstart-latest.git</url>
+		</site>
+	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>reposilite-repository-snapshots</id>
+			<name>MIAGE.DEV maven repository snapshots</name>
+			<url>https://maven.miage.dev/snapshots</url>
+		</repository>
+
+		<repository>
+			<id>reposilite-repository-release</id>
+			<name>MIAGE.DEV maven repository releases</name>
+			<url>https://maven.miage.dev/releases</url>
+		</repository>
+	</repositories>
 </project>
