@@ -37,4 +37,4 @@ Représente n’importe quel nombre de la couleur de la carte.
 Compte comme un 2 de n’importe quelle couleur. Cette carte permet de changer la couleur.
 
 ## Fin de jeu 
-Lorsqu’il ne vous reste que deux cartes, vous devez crier « DOS ».  Si vous vous débarrassez de toutes vos cartes en premier vous avez gagné.
+Si vous vous débarrassez de toutes vos cartes en premier vous avez gagné. Vous ne pouvez pas terminer le jeu avec un jocker DOS.
