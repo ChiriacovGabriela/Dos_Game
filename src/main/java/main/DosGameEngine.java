@@ -33,7 +33,7 @@ public abstract class DosGameEngine {
             players.add(player);
         }
 
-        System.out.println("Rangé Centrale initial est : ");
+        System.out.println("Rangée Centrale initiale est : ");
         for(Card card : centerRow){
             System.out.println(card.getCouleur()+" "+ card.getValeur());
         } 
@@ -48,14 +48,14 @@ public abstract class DosGameEngine {
                 System.out.println(currentPlayer.getName() + " joue");
                 currentPlayer.playARound(centerRow);
 
-                System.out.println("Rangé Centrale: ");
+                System.out.println("Rangée Centrale: ");
 
                 for(Card card : centerRow){
                     System.out.println(card.getCouleur()+" "+ card.getValeur());
                 } 
 
                 if (currentPlayer.win()){
-                    System.out.println(currentPlayer.getName() + " a gagné aprés " + nbOfRound + " tour de jeu ");
+                    System.out.println(currentPlayer.getName() + " a gagné aprés " + nbOfRound + " tours de jeu ");
                     win = true;
                 }
             }
