@@ -32,8 +32,9 @@ public class DosGameEngineTest {
     void getInitialPlayers() {
         assertTrue(engine.getInitialPlayers().containsAll(Set.of("Joueur1", "Joueur2", "Joueur3")));
     }
+
     @Test
-    void giveCardsToPlayer()  {
+    void giveCardsToPlayerForStrategyOne()  {
         Card[] cards = {new Card("Bleu", 0), new Card("Rouge", 4),  new Card(null, 2),new Card("Vert", 1), new Card("Vert", 8), new Card("Vert", 5)};
         engine.giveCardsToPlayerForStrategyOne("Joueur1", cards, 0);
         playerCards = engine.getPlayerCards();
@@ -47,5 +48,32 @@ public class DosGameEngineTest {
 
     }
 
+    @Test
+    void giveCardsToPlayerForStrategyTwo()  {
+        Card[] cards = {new Card("Blue", 4),  new Card(null, 2), new Card("Vert", 8)};
+        engine.giveCardsToPlayerForStrategyTwo("Joueur1", cards, 0);
+        playerCards = engine.getPlayerCards();
+        Player player = playerCards[0] ;
+        Map<String, List<Integer>> cardInHand = player.getHand();
+        int nbOfCards = 0;
+        for (String color : cardInHand .keySet()){
+            nbOfCards += cardInHand.get(color).size();
+        }
+        assertEquals(3, nbOfCards);
+
+    }
+
+    @Test
+    void play(){
+        
+        this.engine.play();
+        int nbOfRound = engine.getNbOfRound();
+        assertEquals(true, nbOfRound != 0);
+
+
+    }
+
+
     
 }
+

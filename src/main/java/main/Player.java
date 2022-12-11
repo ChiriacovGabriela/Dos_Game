@@ -228,7 +228,7 @@ public abstract class Player{
         return false;
     }
 
-    public void makeAMove(Card [] centerRow, List <Card> cardsToRemove, Card... cards) {
+    protected void makeAMove(Card [] centerRow, List <Card> cardsToRemove, Card... cards) {
 
         if(cards.length == 1) {
             changeCentralRow(cards[0], centerRow); 
@@ -239,6 +239,21 @@ public abstract class Player{
     
         removeCards(cardsToRemove);
     
+    }
+
+    protected void makeAMoveWithJockerDos(Card [] centerRow){
+            Card card = new Card(null , VALUE_OF_JOCKER_DOS);
+            List <Card> cardsToRemove = new ArrayList<>();
+            cardsToRemove.add(card);
+            if(handPlayer.isEmpty() || (handPlayer.size() == 1 && handPlayer.containsKey(null)) ) {
+                takeOneCard();
+            }
+            Card cardAfterJockerDos = choseCardAfterJockerDos();
+            String colorOfJockerDos = cardAfterJockerDos.getCouleur();
+            Card cardJockerDos = new Card(colorOfJockerDos, VALUE_OF_JOCKER_DOS);
+            centerRow[1] = cardJockerDos;  
+            removeCards(cardsToRemove);
+
     }
 
 }

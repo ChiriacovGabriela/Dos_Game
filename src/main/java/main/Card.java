@@ -1,6 +1,6 @@
 package main;
 
-import java.util.Collection;
+
 
 public class Card{
     protected String couleur;

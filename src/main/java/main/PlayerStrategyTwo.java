@@ -89,16 +89,7 @@ public class PlayerStrategyTwo extends Player {
         }
 
         if(isJockerDos()) {
-            card = new Card(null , VALUE_OF_JOCKER_DOS);
-            cardsToRemove.add(card);
-            if(handPlayer.isEmpty() || (handPlayer.size() == 1 && handPlayer.containsKey(null)) ) {
-                takeOneCard();
-            }
-            Card cardAfterJockerDos = choseCardAfterJockerDos();
-            String colorOfJockerDos = cardAfterJockerDos.getCouleur();
-            Card cardJockerDos = new Card(colorOfJockerDos, VALUE_OF_JOCKER_DOS);
-            centerRow[1] = cardJockerDos;  
-            removeCards(cardsToRemove);
+            makeAMoveWithJockerDos(centerRow);
             return;
 
         }
@@ -110,3 +101,4 @@ public class PlayerStrategyTwo extends Player {
     }
     
 }
+

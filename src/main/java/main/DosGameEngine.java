@@ -5,10 +5,12 @@ import java.util.Queue;
 import java.util.Set;
 
 public abstract class DosGameEngine {
+
     
     protected static Deck deck = new Deck(); 
     protected abstract Set <String> getInitialPlayers();
     protected Card [] centerRow = Deck.centerRow();
+    private int nbOfRound = 0;
     
     public void play(){
 
@@ -38,6 +40,7 @@ public abstract class DosGameEngine {
 
         boolean win = false;
         while(!win && !Deck.isCardsEmpty()){
+            nbOfRound++;
             
             Player currentPlayer = players.poll();
             players.offer(currentPlayer);
@@ -52,11 +55,19 @@ public abstract class DosGameEngine {
                 } 
 
                 if (currentPlayer.win()){
-                    System.out.println(currentPlayer.getName() + " a gagné");
+                    System.out.println(currentPlayer.getName() + " a gagné aprés " + nbOfRound + " tour de jeu ");
                     win = true;
                 }
             }
+        if (!win){
+            System.out.println("Le jeu est fini, il n'y a pas de gagnant. Nous vous invitons à réessayer.   ");
         }
+        }
+        
+        public int getNbOfRound(){
+            return nbOfRound;
+        }
+   
 
     protected abstract void giveCardsToPlayerForStrategyOne(String playerName, Card[] hand, int index);
     protected abstract void giveCardsToPlayerForStrategyTwo(String playerName, Card[] hand, int index);
