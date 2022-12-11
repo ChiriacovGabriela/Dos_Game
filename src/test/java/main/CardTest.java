@@ -8,8 +8,8 @@ import org.junit.jupiter.api.Test;
 public class CardTest {
     @Test
     public void testCouleur1(){
-        Card card = new Card("Y",9);
-        assertEquals("Y",card.getCouleur());
+        Card card = new Card("Jaune",9);
+        assertEquals("Jaune",card.getCouleur());
     }
     @Test
     public void testCouleur2(){
@@ -18,7 +18,11 @@ public class CardTest {
     }
     @Test
     public void testValeur(){
-        Card card = new Card("Y",9);
+        Card card = new Card("Jaune",9);
         assertEquals(9,card.getValeur());
     }
+
+
+    
+    
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Deck.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dos</a> &gt; <a href="index.source.html" class="el_package">main</a> &gt; <span class="el_source">Deck.java</span></div><h1>Deck.java</h1><pre class="source lang-java linenums">package main;
+import java.util.ArrayList;
+import java.util.Collections;
+
+/**
+ * Represents a Deck of cards
+ */    
+
+public class Deck {
+
+<span class="fc" id="L11">    private static ArrayList &lt;Card&gt; cards = new ArrayList &lt;&gt;();</span>
+    private static final int NB_OF_CARDS_INITIAL_HAND = 7;
+    private static final int NB_OF_CARDS_CENTER_ROW = 2;
+    private static final int VALUE_OF_JOCKER_DOS = 2;
+   
+<span class="fc" id="L16">    public Deck(){</span>
+<span class="fc" id="L17">        generateDeck(); </span>
+<span class="fc" id="L18">    }</span>
+    
+    /**
+     * create all game cards with their color and value
+     */
+    private static void generateDeck(){
+        
+<span class="fc" id="L25">        String [] couleurs = {&quot;Vert&quot;, &quot;Rouge&quot;, &quot;Jaune&quot;,&quot;Bleu&quot;};</span>
+<span class="fc bfc" id="L26" title="All 2 branches covered.">        for (String c : couleurs ){</span>
+<span class="fc bfc" id="L27" title="All 2 branches covered.">            for (int i = 0; i &lt; 4; i++){</span>
+<span class="fc" id="L28">                cards.add(new Card(c, 1)) ;</span>
+<span class="fc" id="L29">                cards.add(new Card(c,3));</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            if(i &lt; 3){</span>
+<span class="fc" id="L31">                cards.add(new Card(c, 4));</span>
+<span class="fc" id="L32">                cards.add(new Card(c,5));</span>
+            }
+<span class="fc bfc" id="L34" title="All 2 branches covered.">            if(i &lt; 2){</span>
+<span class="fc" id="L35">                cards.add(new Card(c, 6));</span>
+<span class="fc" id="L36">                cards.add(new Card(c,7));</span>
+<span class="fc" id="L37">                cards.add(new Card(c,8));</span>
+<span class="fc" id="L38">                cards.add(new Card(c,9));</span>
+<span class="fc" id="L39">                cards.add(new Card(c,10));</span>
+<span class="fc" id="L40">                cards.add(new Card(c,0));</span>
+            }
+        }
+<span class="fc" id="L43">            cards.add(new Card(null,VALUE_OF_JOCKER_DOS));</span>
+        }
+<span class="fc" id="L45">       Collections.shuffle(cards);</span>
+       
+<span class="fc" id="L47">    }</span>
+    
+    /**
+     * create an array of cards
+     * @param n the size of the array
+     * @return an array of cards of length n
+     */
+
+    public static Card[] getCards(int n){
+<span class="fc" id="L56">        Card[] offertsCards = new Card[n];</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">        for(int i = 0; i&lt;n; i++) {</span>
+<span class="fc" id="L58">            int positionCurent = cards.size() - (i + 1);</span>
+<span class="fc" id="L59">            offertsCards[i] = cards.get(positionCurent);</span>
+
+<span class="fc" id="L61">            cards.remove(positionCurent);</span>
+        }
+<span class="fc" id="L63">        return offertsCards;</span>
+    } 
+    /**
+     * create an array(hand) of cards
+     * @return an array of cards with length 7 
+     */
+
+    public Card[] newHand(){
+<span class="fc" id="L71">        Card[] hand = getCards(NB_OF_CARDS_INITIAL_HAND);</span>
+<span class="fc" id="L72">        return hand;</span>
+    }
+
+    /**
+     * create an array(Center Row) of cards
+     * @return an array of cards with length 2
+     */
+    public static Card [] centerRow(){
+<span class="fc" id="L80">        Card [] centerRow = getCards(NB_OF_CARDS_CENTER_ROW );</span>
+<span class="pc bpc" id="L81" title="2 of 4 branches missed.">        while((centerRow[0].getValeur() == VALUE_OF_JOCKER_DOS) || (centerRow[1].getValeur() == VALUE_OF_JOCKER_DOS)){</span>
+<span class="nc" id="L82">            Card [] anotherCardForCR = getCards(1);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            if((centerRow[0].getValeur() == VALUE_OF_JOCKER_DOS)){</span>
+<span class="nc" id="L84">                centerRow[0]=anotherCardForCR[0];</span>
+            }else{
+<span class="nc" id="L86">                centerRow[1]=anotherCardForCR[0];</span>
+            }
+<span class="nc" id="L88">        }</span>
+<span class="fc" id="L89">        return centerRow;</span>
+    }
+
+    /**
+     * return if there are no more cards and false if there are cards
+     * @return a boolean 
+     */
+    public static boolean isCardsEmpty(){
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if(cards.isEmpty()){</span>
+<span class="nc" id="L98">            return true;</span>
+        }
+<span class="fc" id="L100">        return false;</span>
+    }
+}
+    
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
